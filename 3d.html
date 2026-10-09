@@ -120,7 +120,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     <div>
       <p style="margin:0 0 6px;font-size:13px"><a href="index.html" style="color:var(--accent)">&larr; Scheda prodotto</a></p>
       <h1>Parete Verde</h1>
-      <p class="sub">Mobile dietro divano con due moduli che scorrono di lato, uno per l'acqua e uno a libreria, più parete idroponica modulare. Cambia la configurazione, apri i moduli o guarda l'esploso.</p>
+      <p class="sub">Mobile dietro divano con due moduli che scorrono di lato, uno per l'acqua e uno a libreria, più parete idroponica a moduli da 60 cm. Cambia la configurazione, apri i moduli o guarda l'esploso.</p>
     </div>
 
     <fieldset>
@@ -134,9 +134,9 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     <fieldset>
       <legend>Lunghezza mobile</legend>
       <div class="seg">
-        <input type="radio" name="cons" id="cons120" value="1.2"><label for="cons120">120 cm</label>
+        <input type="radio" name="cons" id="cons130" value="1.3"><label for="cons130">130 cm</label>
         <input type="radio" name="cons" id="cons160" value="1.6" checked><label for="cons160">160 cm</label>
-        <input type="radio" name="cons" id="cons200" value="2.0"><label for="cons200">200 cm</label>
+        <input type="radio" name="cons" id="cons190" value="1.9"><label for="cons190">190 cm</label>
       </div>
     </fieldset>
 
@@ -149,7 +149,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     </fieldset>
 
     <fieldset>
-      <legend>Canaline</legend>
+      <legend>File di canaline</legend>
       <div class="seg">
         <input type="radio" name="rows" id="rows2" value="2"><label for="rows2">2</label>
         <input type="radio" name="rows" id="rows3" value="3" checked><label for="rows3">3</label>
@@ -158,19 +158,11 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     </fieldset>
 
     <fieldset>
-      <legend>Lunghezza canaline</legend>
+      <legend>Moduli parete, da 60 cm</legend>
       <div class="seg">
-        <input type="radio" name="len" id="len90" value="0.9"><label for="len90">90 cm</label>
-        <input type="radio" name="len" id="len120" value="1.2" checked><label for="len120">120 cm</label>
-        <input type="radio" name="len" id="len150" value="1.5"><label for="len150">150 cm</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Distanza tra le piante</legend>
-      <div class="seg">
-        <input type="radio" name="gap" id="gap15" value="0.15"><label for="gap15">15 cm</label>
-        <input type="radio" name="gap" id="gap20" value="0.20" checked><label for="gap20">20 cm</label>
+        <input type="radio" name="mods" id="mods1" value="1"><label for="mods1">1 · 60 cm</label>
+        <input type="radio" name="mods" id="mods2" value="2" checked><label for="mods2">2 · 120 cm</label>
+        <input type="radio" name="mods" id="mods3" value="3"><label for="mods3">3 · 180 cm</label>
       </div>
     </fieldset>
 
@@ -191,7 +183,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
   <section class="drawings" aria-labelledby="dtitle">
     <div>
       <h2 id="dtitle">Dentro il mobile</h2>
-      <p class="sub">Un guscio fisso, cioè piano, base con guide e colonna tecnica al centro, più due moduli che escono di lato. Il modulo acqua sta dalla parte della sagoma per i tubi, quello libreria dall'altra. Ogni modulo ha fondo, schiena e fianchi ed è aperto davanti; quando è chiuso, il davanti lo copre il fronte fisso del guscio. Disegni per il mobile da 160 cm, piano a 82 cm, 3 canaline da 120 cm.</p>
+      <p class="sub">Un guscio fisso, cioè piano, base con guide e colonna tecnica al centro, più due moduli che escono di lato. Il modulo acqua sta dalla parte della sagoma per i tubi, quello libreria dall'altra. Ogni modulo ha fondo, schiena e fianchi ed è aperto davanti; quando è chiuso, il davanti lo copre il fronte fisso del guscio. Disegni per il mobile da 160 cm, piano a 82 cm, parete da 2 moduli (120 cm) per 3 file.</p>
     </div>
     <div class="svgbox">
       <svg viewBox="0 0 960 690" role="img" aria-label="Sezioni dei moduli e della colonna tecnica, pianta e prospetto con i moduli aperti">
@@ -313,6 +305,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
         <path class="chan" d="M644 377L812 371"/>
         <path class="chan" d="M644 424L812 430"/>
         <path class="chan" d="M644 483L812 477"/>
+        <line x1="728" y1="368" x2="728" y2="380" stroke="var(--panel)" stroke-width="2"/><line x1="728" y1="421" x2="728" y2="433" stroke="var(--panel)" stroke-width="2"/><line x1="728" y1="474" x2="728" y2="486" stroke="var(--panel)" stroke-width="2"/>
         <path class="pret" d="M640 377V424M816 430V477M640 483V536"/>
         <path class="pipe" d="M647 536V489H818V367H806V372"/>
         <rect class="solid" x="634" y="536" width="19" height="7"/>
@@ -514,7 +507,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     const v = n => document.querySelector('input[name="' + n + '"]:checked').value;
     return {
       mode: v('mode'), cons: parseFloat(v('cons')), h: parseFloat(v('hgt')), rows: parseInt(v('rows'), 10),
-      len: parseFloat(v('len')), gap: parseFloat(v('gap')),
+      mods: parseInt(v('mods'), 10), len: 0.6 * parseInt(v('mods'), 10),
       night: document.getElementById('night').checked,
       sofa: document.getElementById('sofa').checked,
       xray: document.getElementById('xray').checked,
@@ -687,29 +680,37 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     const g = new THREE.Group();
     const baseY = c.h + 0.32, step = 0.38;
     const topY = baseY + (c.rows - 1) * step;
-    const railX = Math.min(0.42, c.len / 2 - 0.12);
+    const M = 0.6, nM = c.mods;                       // modulo unico da 60 cm
+    const railXs = []; for (let i = 0; i <= nM; i++) railXs.push(-c.len / 2 + i * M);
     const railH = (topY + 0.32) - (baseY - 0.12);
-    [-1, 1].forEach(sx => box(g, 0.025, railH, 0.012, mat.alu, sx * railX, baseY - 0.12 + railH / 2, 0.006));
+    railXs.forEach(x => box(g, 0.025, railH, 0.012, mat.alu, x, baseY - 0.12 + railH / 2, 0.006));
     const chZ = 0.085;
     for (let r = 0; r < c.rows; r++) {
       const y = baseY + r * step;
-      [-1, 1].forEach(sx => {
-        box(g, 0.02, 0.01, 0.13, mat.alu, sx * railX, y - 0.035, 0.065);
-        box(g, 0.02, 0.06, 0.01, mat.alu, sx * railX, y - 0.01, 0.017);
-      });
       const t = c.rows - 1 - r;
-      const tilt = (t % 2 === 0 ? 1 : -1) * 0.02;
-      const ch = box(g, c.len, 0.05, 0.10, mat.channel, 0, y, chZ);
-      ch.rotation.z = tilt;
+      const tilt = (t % 2 === 0 ? 1 : -1) * 0.02;   // > 0: scende verso sinistra
+      railXs.forEach(x => {
+        box(g, 0.02, 0.01, 0.13, mat.alu, x, y + x * tilt - 0.035, 0.065);
+        box(g, 0.02, 0.06, 0.01, mat.alu, x, y + x * tilt - 0.01, 0.017);
+      });
+      for (let i = 0; i < nM; i++) {
+        const cx = -c.len / 2 + M / 2 + i * M;
+        const ch = box(g, M - 0.004, 0.05, 0.10, mat.channel, cx, y + cx * tilt, chZ);
+        ch.rotation.z = tilt;
+        [-0.2, 0, 0.2].forEach((dx, k) => { const px = cx + dx; plant(g, px, y + 0.045 + px * tilt, chZ, r * 11 + (i * 3 + k) * 3); });
+      }
+      // giunti a sovrapposizione: l'estremita' femmina sta a valle del giunto
+      for (let i = 1; i < nM; i++) {
+        const jx = -c.len / 2 + i * M + (tilt > 0 ? -0.02 : 0.02);
+        const j = box(g, 0.04, 0.056, 0.106, mat.carter, jx, y + jx * tilt, chZ, false);
+        j.rotation.z = tilt;
+      }
       [-1, 1].forEach(sx => box(g, 0.006, 0.054, 0.104, mat.carter, sx * (c.len / 2 + 0.003), y + sx * (c.len / 2) * tilt, chZ, false));
-      const n = Math.floor(c.len / c.gap + 1e-6);
-      const start = -((n - 1) * c.gap) / 2;
-      for (let i = 0; i < n; i++) { const px = start + i * c.gap; plant(g, px, y + 0.045 + px * tilt, chZ, r * 11 + i * 3); }
       const ly = y + 0.27;
-      box(g, c.len * 0.9, 0.018, 0.04, c.night ? mat.ledOn : mat.ledOff, 0, ly, 0.16, false);
-      [-1, 1].forEach(sx => box(g, 0.015, 0.015, 0.16, mat.alu, sx * railX, ly, 0.08));
+      for (let i = 0; i < nM; i++) box(g, M - 0.06, 0.018, 0.04, c.night ? mat.ledOn : mat.ledOff, -c.len / 2 + M / 2 + i * M, ly, 0.16, false);
+      railXs.forEach(x => box(g, 0.015, 0.015, 0.16, mat.alu, x, ly, 0.08));
       if (c.night && c.mode === 'all') {
-        const spot = new THREE.SpotLight(0xffd9a8, 2.2, 1.2, Math.PI / 2.6, 0.7, 1.5);
+        const spot = new THREE.SpotLight(0xffd9a8, 2.2, 0.6 + 0.6 * nM, Math.PI / 2.6, 0.7, 1.5);
         spot.position.set(0, ly - 0.02, 0.16);
         spot.target.position.set(0, y, 0.12);
         scene.add(spot); scene.add(spot.target);
@@ -788,16 +789,16 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
       lastMode = c.mode;
     }
 
-    const perRow = Math.floor(c.len / c.gap + 1e-6);
-    const sizeName = c.rows === 2 ? 'S' : c.rows === 3 ? 'M' : 'L';
+    const perRow = 3 * c.mods;
     document.getElementById('summary').innerHTML =
       '<dt>Piante</dt><dd>' + perRow * c.rows + '</dd>' +
       '<dt>Piante per canalina</dt><dd>' + perRow + '</dd>' +
       '<dt>Altezza totale dal pavimento</dt><dd>' + Math.round((wallB.topY + 0.3) * 100) + ' cm</dd>' +
-      '<dt>Ingombro a muro</dt><dd>' + Math.round(Math.max(c.cons, c.len + 0.12) * 100) + ' cm</dd>' +
+      '<dt>Ingombro a muro</dt><dd>' + Math.round(Math.max(c.cons, c.len + 0.1) * 100) + ' cm</dd>' +
       '<dt>Serbatoio standard</dt><dd>' + cons.liters + ' litri</dd>' +
       '<dt>Spostamento divano</dt><dd>25 cm</dd>' +
-      '<dt>Configurazione</dt><dd>' + c.rows + ' × ' + Math.round(c.len * 100) + ' cm' + (c.len === 1.2 ? ' (' + sizeName + ')' : '') + '</dd>';
+      '<dt>Parete</dt><dd>' + c.mods + ' moduli × ' + c.rows + ' file</dd>' +
+      '<dt>Pezzi parete</dt><dd>' + (c.mods * c.rows) + ' canaline, ' + (c.mods * c.rows) + ' luci, ' + ((c.mods - 1) * c.rows) + ' giunti, ' + (c.mods + 1) + ' binari</dd>';
     applyBg();
   }
 
