@@ -344,6 +344,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
         <p>Una cassa con fondo, schiena e fianchi, aperta davanti, su una coppia di guide a estrazione totale. Esce dal lato opposto al vano; quando è chiusa la copre il fronte fisso, così i libri restano dentro anche se si sposta il mobile.</p>
       </div>
     </div>
+    <p class="note"><strong>Per il falegname:</strong> <a href="falegname.html">distinta di taglio, ferramenta e disegni quotati</a>.</p>
     <p class="note">Il corpo del mobile sta 4 cm staccato dal muro, sotto un piano che arriva fino al muro: lì dietro passano andata, ritorno e il cavo della presa, e c'è posto per una spina piatta ad angolo, ovunque sia la presa lungo il mobile. Il serbatoio pieno pesa 25-30 kg ma non si muove mai con il mobile: si rabbocca dal tappo sul piano. Per pulirlo si apre l'anta, si sfilano i due tubi dal coperchio, si stacca il connettore della pompa e lo si fa scivolare fuori dal fianco; conviene prima svuotarlo in parte con un sifone. Con un fondo in laminato liscio, o due listelli in plastica, scorre senza fatica. La libreria piena di libri pesa 30-40 kg: bastano guide da 45 kg con blocco in chiusura.</p>
   </section>
 </div>
@@ -601,30 +602,41 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     poly(g, [[P.xf - s * 0.05, yRail + 0.05, zIn], [P.xf - s * 0.05, yTank + 0.04, zIn], [xT + s * 0.12, yShelf + 0.03, shZ0 + 0.03]], mat.frame, 0.004);
 
     // libreria scorrevole: fondo, schiena e due fianchi, aperta davanti; davanti il fronte fisso
+    // struttura in 18 mm; schiena in HDF da 3 mm; ripiani da 16 mm; montante centrale per non far flettere i ripiani
+    const hdf = 0.003, tS = 0.016;
     const mw = wB - 0.006, Dm = Db - t - 0.006, hM = H - 0.03 - 0.006 - yMod;
     const mB = new THREE.Group();
-    box(mB, mw, t, Dm, mat.inner, 0, t / 2, Dm / 2);
-    box(mB, mw, hM, t, shell, 0, hM / 2, t / 2, !ghost);
+    const iw = mw - 2 * t, dIn = Dm - hdf;                  // larghezza e profondità interne
+    box(mB, iw, t, dIn, mat.inner, 0, t / 2, hdf + dIn / 2);            // fondo tra i fianchi
+    box(mB, mw, hM, hdf, mat.inner, 0, hM / 2, hdf / 2);                 // schiena HDF
     [-1, 1].forEach(k => box(mB, t, hM, Dm, shell, k * (mw / 2 - t / 2), hM / 2, Dm / 2, !ghost));
+    box(mB, iw, 0.08, t, shell, 0, hM - 0.04, hdf + t / 2, !ghost);     // traverso alto
+    const hDiv = hM - 2 * t;
+    box(mB, t, hDiv, dIn, shell, 0, t + hDiv / 2, hdf + dIn / 2, !ghost); // montante centrale
     box(mB, 0.012, 0.12, 0.012, mat.alu, -s * (mw / 2 + 0.008), hM * 0.55, Dm / 2, false);
     [Z + 0.05, D - 0.05].forEach(z => box(g, mw * 0.95, 0.012, 0.03, mat.alu, xB, yRail + 0.006, z, false));
     add(g, mB, xB, yMod, Z);
     slides.push({ obj: mB, base: xB, dx: -s * (mw + 0.02) });
-    const hIn = hM - t;
+    const bay = (iw - t) / 2, hIn = hDiv;
     const shY = [t + hIn / 3, t + 2 * hIn / 3];
-    shY.forEach(y => box(mB, mw - 2 * t, t, Dm - t, mat.oak, 0, y, Dm / 2 + t / 2));
     const bookCols = [0x7a5c3e, 0x3f5d6b, 0xb7a27a, 0x6b4a4a, 0x55705a, 0xd2c6ad];
-    [t, shY[0] + t / 2, shY[1] + t / 2].forEach((y0, row) => {
-      let x = -mw / 2 + t + 0.02;
-      for (let i = 0; i < 12 + row; i++) {
-        const w = 0.025 + ((i * 7 + row * 3) % 4) * 0.008;
-        const h = Math.min(hIn / 3 - 0.04, 0.16 + ((i * 5 + row) % 4) * 0.025);
-        if (x + w > mw / 2 - t - 0.06) break;
-        box(mB, w, h, 0.14, M(bookCols[(i + row * 2) % bookCols.length], { roughness: 0.8 }), x + w / 2, y0 + h / 2, Dm / 2 + 0.01);
-        x += w + 0.004;
-      }
+    [-1, 1].forEach((k, bi) => {
+      const cx = k * (t / 2 + bay / 2);
+      shY.forEach(y => box(mB, bay - 0.002, tS, dIn - 0.01, mat.oak, cx, y, hdf + (dIn - 0.01) / 2));
+      [t, shY[0] + tS / 2, shY[1] + tS / 2].forEach((y0, row) => {
+        let x = cx - bay / 2 + 0.015;
+        for (let i = 0; i < 9; i++) {
+          const w = 0.025 + ((i * 7 + row * 3 + bi) % 4) * 0.008;
+          const h = Math.min(hIn / 3 - 0.04, 0.16 + ((i * 5 + row + bi) % 4) * 0.025);
+          if (x + w > cx + bay / 2 - 0.05) break;
+          box(mB, w, h, 0.14, M(bookCols[(i + row * 2 + bi) % bookCols.length], { roughness: 0.8 }), x + w / 2, y0 + h / 2, Dm / 2 + 0.01);
+          x += w + 0.004;
+        }
+      });
     });
     const front = box(g, wB, hV, t, frontMat, xB, yV, D - t / 2, !(c.xray || exp));
+    // montante posteriore nell'intercapedine, all'estremità della libreria: regge l'angolo del piano
+    box(g, t, H - 0.03 - 0.04, Z - 0.004, shell, -s * (L / 2 - t / 2), 0.04 + (H - 0.07) / 2, (Z - 0.004) / 2, !ghost);
 
     // piano fisso con sagoma semicircolare sul retro e tappo di carico sopra il serbatoio
     const xn = (P.xr + P.xf) / 2, rn = 0.05;
@@ -653,7 +665,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     const liters = Math.round(tankL * tD * tH * 1000);
     tag(1, 'Piano fisso', topMesh, xB + s * 0.05 - s * 0.45, 0.0, D * 0.7);
     tag(2, 'Vano serbatoio', frontT, -s * 0.22, -0.3, 0);
-    tag(3, 'Libreria scorrevole', mB, 0, hM * 0.9, Dm / 2);
+    tag(3, 'Libreria scorrevole', mB, s * 0.25, hM * 0.9, Dm / 2);
     tag(4, 'Anta sul fianco', door, 0, 0.3, 0);
     tag(5, 'Guide', g, xB - s * mw * 0.3, yRail, D - 0.05);
     tag(6, 'Mensola tecnica', psu, -s * 0.12, 0.14, 0);
