@@ -203,7 +203,6 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
         <rect class="solid" x="62" y="361" width="18" height="19"/>
         <path class="pret" d="M51 60V265L63 275V330"/>
         <path class="pipe" d="M55 60V265L69 275V361"/>
-        <line class="thin" x1="72" y1="148" x2="72" y2="281" stroke-dasharray="4 3"/>
         <rect class="solid" x="75" y="232" width="48" height="4"/>
         <rect class="solid" x="80" y="218" width="22" height="14"/>
         <rect class="thin" x="106" y="222" width="14" height="10"/>
@@ -217,9 +216,8 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
         <text class="lbl-q" x="20" y="470">corpo 22 cm + 4 cm per cavi, tubi e spina</text>
         <g class="mk"><circle cx="104" cy="124" r="9"/><text x="104" y="128">1</text></g>
         <g class="mk"><circle cx="58" cy="124" r="9"/><text x="58" y="128">11</text></g>
-        <g class="mk"><circle cx="82" cy="124" r="9"/><text x="82" y="128">13</text></g>
         <g class="mk"><circle cx="91" cy="200" r="9"/><text x="91" y="204">6</text></g>
-        <g class="mk"><circle cx="113" cy="246" r="8"/><text x="113" y="250">14</text></g>
+        <g class="mk"><circle cx="113" cy="246" r="8"/><text x="113" y="250">13</text></g>
         <g class="mk"><circle cx="100" cy="300" r="9"/><text x="100" y="304">7</text></g>
         <g class="mk"><circle cx="92" cy="352" r="8"/><text x="92" y="356">10</text></g>
         <g class="mk"><circle cx="126" cy="262" r="9"/><text x="126" y="266">2</text></g>
@@ -331,8 +329,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
       <li><b>10</b><span>Pompa 24 V nel serbatoio, cavo fino alla mensola</span></li>
       <li><b>11</b><span>Sagoma semicircolare: andata e ritorno scendono liberi nel serbatoio</span></li>
       <li><b>12</b><span>Fronte fisso lato divano davanti alla libreria</span></li>
-      <li><b>13</b><span>Tappo di carico sul piano: si rabbocca senza aprire il vano</span></li>
-      <li><b>14</b><span>Ciabatta sulla mensola: divide la corrente tra alimentatore della parete e prese sul piano</span></li>
+      <li><b>13</b><span>Ciabatta sulla mensola: divide la corrente tra alimentatore della parete e prese sul piano</span></li>
     </ol>
     <div class="kit">
       <div>
@@ -345,7 +342,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
       </div>
     </div>
     <p class="note"><strong>Per il falegname:</strong> <a href="falegname.html">distinta di taglio, ferramenta e disegni quotati</a>.</p>
-    <p class="note">Il corpo del mobile sta 4 cm staccato dal muro, sotto un piano che arriva fino al muro: lì dietro passano andata, ritorno e il cavo della presa, e c'è posto per una spina piatta ad angolo, ovunque sia la presa lungo il mobile. Il serbatoio pieno pesa 25-30 kg ma non si muove mai con il mobile: si rabbocca dal tappo sul piano. Per pulirlo si apre l'anta, si sfilano i due tubi dal coperchio, si stacca il connettore della pompa e lo si fa scivolare fuori dal fianco; conviene prima svuotarlo in parte con un sifone. Con un fondo in laminato liscio, o due listelli in plastica, scorre senza fatica. La libreria piena di libri pesa 30-40 kg: bastano guide da 45 kg con blocco in chiusura.</p>
+    <p class="note">Il corpo del mobile sta 4 cm staccato dal muro, sotto un piano che arriva fino al muro: lì dietro passano andata, ritorno e il cavo della presa, e c'è posto per una spina piatta ad angolo, ovunque sia la presa lungo il mobile. Il serbatoio pieno pesa 25-30 kg ma non si muove mai con il mobile: si rabbocca dall'anta, con una brocca, da un'apertura nel coperchio sul lato dell'anta. Per pulirlo si apre l'anta, si sfilano i due tubi dal coperchio, si stacca il connettore della pompa e lo si fa scivolare fuori dal fianco; conviene prima svuotarlo in parte con un sifone. Con un fondo in laminato liscio, o due listelli in plastica, scorre senza fatica. La libreria piena di libri pesa 30-40 kg: bastano guide da 45 kg con blocco in chiusura.</p>
   </section>
 </div>
 
@@ -574,7 +571,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
 
     // mensola tecnica sopra il serbatoio: ciabatta, alimentatore 24 V, timer
     const yShelf = Math.min(yTank + 0.16, H - 0.16);
-    const shZ0 = Z + 0.05, shD = D - t - shZ0;   // dietro resta libero il passaggio di tubi e carico
+    const shZ0 = Z + 0.05, shD = D - t - shZ0;   // dietro resta libero il passaggio dei tubi
     box(g, wT - 2 * t, t, shD, mat.inner, xT, yShelf, shZ0 + shD / 2);
     const psu = box(g, 0.16, 0.045, 0.07, mat.psu, xT + s * 0.08, yShelf + t / 2 + 0.0225, shZ0 + 0.06);
     box(g, 0.06, 0.05, 0.05, mat.timer, xT - s * 0.13, yShelf + t / 2 + 0.025, shZ0 + 0.05);
@@ -585,9 +582,6 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     const zIn = Z + 0.03;
     poly(g, [[P.xf, H + 0.02, P.zp], [P.xf, yTank + 0.06, P.zp], [P.xf, yTank, zIn], [P.xf, yRail + 0.07, zIn]], mat.pipe);
     poly(g, [[P.xr, H + 0.02, P.zp], [P.xr, yTank + 0.06, P.zp], [P.xr, yTank, zIn], [P.xr, yRail + tH * 0.45, zIn]], mat.pipe, 0.011);
-    // tubo di carico dal tappo sul piano al coperchio del serbatoio
-    const xCap = xT - s * 0.2, zCap = Z + 0.03;
-    poly(g, [[xCap, H - 0.03, zCap], [xCap, yTank + 0.01, zCap]], mat.carter, 0.012);
 
     // corrente: presa a muro dietro il mobile, un cavo nell'intercapedine fino alla ciabatta;
     // dalla ciabatta partono l'alimentatore della parete e il cavo delle prese sul piano
@@ -638,7 +632,7 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     // montante posteriore nell'intercapedine, all'estremità della libreria: regge l'angolo del piano
     box(g, t, H - 0.03 - 0.04, Z - 0.004, shell, -s * (L / 2 - t / 2), 0.04 + (H - 0.07) / 2, (Z - 0.004) / 2, !ghost);
 
-    // piano fisso con sagoma semicircolare sul retro e tappo di carico sopra il serbatoio
+    // piano fisso con sagoma semicircolare sul retro
     const xn = (P.xr + P.xf) / 2, rn = 0.05;
     const sh = new THREE.Shape();
     sh.moveTo(-L / 2 - 0.005, 0);
@@ -655,7 +649,6 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     const top = new THREE.Group();
     top.add(topMesh); topMesh.position.y = 0.03;
     box(top, 0.12, 0.006, 0.07, mat.socket, xTopS, 0.033, D - 0.08, false);
-    const cap = add(top, new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.008, 24), mat.alu), xCap, 0.034, zCap, false);
     add(g, top, 0, H - 0.03, 0);
     const notchMark = new THREE.Object3D();
     top.add(notchMark); notchMark.position.set(xn, 0.03, rn + 0.01);
@@ -672,11 +665,10 @@ legend { font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; co
     tag(7, 'Serbatoio ' + liters + ' L', tank, 0, tH * 0.95, tD / 2);
     tag(8, 'Prese sul piano', topMesh, xTopS, -0.04, D);
     tag(9, 'Presa a muro e cavo', cable, xWall, ySock + 0.05, 0.02);
-    tag(14, 'Ciabatta', strip, s * 0.05, -0.06, 0.03);
+    tag(13, 'Ciabatta', strip, s * 0.05, -0.06, 0.03);
     tag(10, 'Pompa 24 V', pump, 0, 0.05, 0);
     tag(11, 'Sagoma per i tubi', notchMark, 0, 0.07, 0);
     tag(12, 'Fronte fisso', front, 0, -0.1, 0);
-    tag(13, 'Tappo di carico', cap, -s * 0.12, 0.02, 0);
 
     return { g, liters, wT, wB };
   }
